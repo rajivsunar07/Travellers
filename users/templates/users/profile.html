@@ -1,0 +1,53 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <div class="container mt-4 pb-4">
+        <div class="row mt-4 pb-4 border-bottom">
+            <div class="col">
+                <div class="row ml-3">
+                    <h3>{{current_profile.username}}</h3>
+                    {% if currently_following %}
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-danger ml-3" name="unfollow">Unfollow</button>
+                    </form>
+                    {% elif current_profile == request.user %}
+                    {% else %}
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <button class="btn btn-success ml-3"  type="submit">Follow</button>
+                        </form>
+                    {% endif %}
+                </div>
+                <div class="row justify-content-end mt-4">
+                    <div class="col-6">
+                        <div class="row justify-content-center">
+                            <div class="col ml-4">{{followers.count}}</div>
+                            <div class="col ml-4">{{following.count}}</div>
+                            <div class="col ml-4">{{posts.count}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Followers</div>
+                            <div class="col">Following</div>
+                            <div class="col">Posts</div>
+                        </div>
+                    </div>
+                    
+                <div class="row">
+                    <div class="col"></div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+
+    </div>
+
+
+    
+
+    
+
+{% endblock content %}
+

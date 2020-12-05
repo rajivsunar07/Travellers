@@ -1,0 +1,18 @@
+{% extends 'users/base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <a href="{% url 'create_blog' %}" class="ml-4 mt-4"><i class="fas fa-plus mr-3"></i>Create post</a>
+    </div>
+    {% for post in post_list %} 
+    <div class="row justify-content-center mb-4">
+        <div class="col-4 border p-4">
+            <a href="{% url 'profile' post.author.username %}" class="">{{post.author.username}}</a>
+            <div class="text-muted border-bottom">{{post.location.address}}, {{post.location.city}}, {{post.location.country}}</div>
+            <div class="mt-3">{{post.content}}</div>
+
+            <img class="img-fluid mr-auto ml-auto" width="500px" src="{{ post.image.url }}">
+        </div>
+    </div>
+        
+    {% endfor %}
+{% endblock %}
