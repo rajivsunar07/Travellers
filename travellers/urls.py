@@ -25,6 +25,7 @@ urlpatterns = [
     path('login/', user_views.login, name='login'),
     path('signup/', user_views.signup, name='signup'),
     path('profile/<str:username>/', user_views.profile, name='profile'),
+    path('update/profile/', user_views.profile_update, name='profile_update'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('blog/', include('blog.urls'))
    

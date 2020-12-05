@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import auth, User
 from .models import Followers
 from blog.models import Blog
+from .forms import ProfileUpdateForm, UserUpdateForm
 
 # Create your views here.
 
@@ -64,3 +65,22 @@ def profile(request, username):
         'posts': posts
     }
     return render(request, 'users/profile.html', context)
+
+def profile_update(request):
+    profile_form = ProfileUpdateForm(instance=request.user.profile)
+    user_form = UserUpdateForm(instance=request.user)
+
+    if request.method == 'POST':
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        if profile_form.is_valid() and user_form.is_valid():
+            user_form.save()
+            profile_form.instance.user = user_form.instance
+            profile_form.save()
+            return redirect('profile', request.user.username)
+        
+    context={
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+    return render(request, 'users/user_update.html', context)

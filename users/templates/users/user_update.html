@@ -1,0 +1,41 @@
+
+{% extends 'users/base.html' %}
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Errors in form submission -->
+        {% for key,error in user_form.errors.items %} 
+            <p>{{ error }}</p>
+        {% endfor %}
+        {% for key,error in profile_form.errors.items %} 
+            <p>{{ error }}</p>
+        {% endfor %}
+        <div class="row form-group justify-content-center">
+            <div class="col-6"> {{ user_form.as_p}}</div>
+        </div>
+        <!-- <div class="row form-group justify-content-center">
+            <div class="col-4 col-sm-3 col-md-2 pt-2"> {{ user_form.first_name.label }}</div>
+            <div class="col-6"> {{ user_form.first_name }}</div>
+        </div>
+        <div class="row form-group justify-content-center">
+            <div class="col-4 col-sm-3 col-md-2 pt-2"> {{ user_form.last_name.label }}</div>
+            <div class="col-6"> {{ user_form.last_name }}</div>
+        </div>
+        <div class="row form-group justify-content-center">
+            <div class="col-4 col-sm-3 col-md-2 pt-2"> {{ user_form.username.label }}</div> 
+            <div class="col-6"> {{ user_form.username }}</div>       
+        </div>
+        <div class="row form-group justify-content-center">
+            <div class="col-4 col-sm-3 col-md-2 pt-2"> {{ user_form.email.label }}</div>       
+            <div class="col-6"> {{ user_form.email }}</div>       
+        </div> -->
+        <div class="row form-group justify-content-center">   
+            <div class="col-6"> {{profile_form.as_p}}</div>       
+        </div>
+        <div class="row justify-content-center">
+            <button type="submit" class="btn btn-success mb-3 ">Update User</button>
+        </div>
+    </form>
+
+{% endblock content %}
